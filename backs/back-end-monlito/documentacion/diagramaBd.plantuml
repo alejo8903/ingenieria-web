@@ -1,0 +1,58 @@
+@startuml
+
+entity "Tipo de Proyecto" {
+    * id : int
+    --
+    nombre : string
+    fecha_creacion : datetime
+    fecha_actualizacion : datetime
+}
+
+entity "Cliente" {
+    * id : int
+    --
+    nombre : string
+    email : string
+    fecha_creacion : datetime
+    fecha_actualizacion : datetime
+}
+
+entity "Universidad" {
+    * id : int
+    --
+    nombre : string
+    direccion : string
+    telefono : string
+    fecha_creacion : datetime
+    fecha_actualizacion : datetime
+}
+
+entity "Etapa" {
+    * id : int
+    --
+    nombre : string
+    fecha_creacion : datetime
+    fecha_actualizacion : datetime
+}
+
+entity "Proyecto" {
+    * numero : int
+    --
+    titulo : string
+    fecha_iniciacion : datetime
+    fecha_entrega : datetime
+    valor : float
+    fecha_creacion : datetime
+    fecha_actualizacion : datetime
+    cliente_id : int
+    tipo_proyecto_id : int
+    universidad_id : int
+    etapa_id : int
+}
+
+Tipo_de_Proyecto ||--o{ Proyecto : "tipo_proyecto_id"
+Cliente ||--o{ Proyecto : "cliente_id"
+Universidad ||--o{ Proyecto : "universidad_id"
+Etapa ||--o{ Proyecto : "etapa_id"
+
+@enduml

@@ -1,0 +1,17 @@
+# Docker compose
+version: '3.7'
+services:
+  principal:
+    container_name: aux
+    image: aux:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - proyeco-app
+
+networks:
+  proyeco-app:
+    driver: bridge
