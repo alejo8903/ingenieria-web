@@ -10,8 +10,8 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - proyeco-app
+      - proyecto-app
 
 networks:
-  proyeco-app:
-    driver: bridge
+  proyecto-app:
+    external: true
