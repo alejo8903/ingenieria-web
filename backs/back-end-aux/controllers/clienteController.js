@@ -22,6 +22,7 @@ const createCliente = async (req, res) => {
 const getClientes = async (req, res) => {
     try {
         const clientesDB = await Cliente.find()
+        console.log(clientesDB)
         return res.json(clientesDB)
     } catch (e) {
         return res.status(500).json({

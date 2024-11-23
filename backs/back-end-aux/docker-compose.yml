@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: ./nginx
+      dockerfile: dockerfile
+    ports:
+      - "80:80"
+
+  aux:
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    ports:
+      - "3000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+networks:
+  proyecto-app:
+    external: true
