@@ -1,4 +1,4 @@
-const { request, response} = require('express')
+const { request, response } = require('express')
 const Proyecto = require('../models/proyecto')
 const Etapa = require('../models/etapa')
 const Cliente = require('../models/cliente')
@@ -10,10 +10,10 @@ const Universidad = require('../models/universidad')
 const createProyecto = async (req = request, res = response) => {
     try {
         const etapas = await Etapa.findById(req.body.etapas)
-        const cliente  = await Cliente.findById(req.body.cliente)
+        const cliente = await Cliente.findById(req.body.cliente)
         const tipoProyecto = await TipoProyecto.findById(req.body.tipoProyecto)
         const universidad = await Universidad.findById(req.body.universidad)
-        
+
         if (!etapas || !cliente || !tipoProyecto || !universidad) {
             return res.status(400).json({
                 msg: 'One or more related entities not found'
@@ -28,11 +28,11 @@ const createProyecto = async (req = request, res = response) => {
             etapas,
             cliente,
             tipoProyecto,
-            universidad 
+            universidad
         }
         const newProyecto = new Proyecto(proyecto)
         await newProyecto.save()
-        res.status(201).json({newProyecto})
+        res.status(201).json({ newProyecto })
     } catch (e) {
         res.status(500).json({
             msg: 'Error general ' + e
@@ -42,20 +42,20 @@ const createProyecto = async (req = request, res = response) => {
 
 const getProyectos = async (req = request, res = response) => {
     try {
-      const proyectos = await Proyecto.find()
-        .populate('etapas')
-        .populate('cliente')
-        .populate('tipoProyecto')
-        .populate('universidad')
+        const proyectos = await Proyecto.find()
+            .populate('etapas')
+            .populate('cliente')
+            .populate('tipoProyecto')
+            .populate('universidad')
 
-  
-      res.json(proyectos);
+        console.log("Peticion recibida - Hora actual: " + new Date().toLocaleTimeString())
+        res.json(proyectos);
     } catch (e) {
-      res.status(500).json({
-        msg: 'Error general ' + e
-      });
+        res.status(500).json({
+            msg: 'Error general ' + e
+        });
     }
-  };
+};
 
 const getProyecto = async (req = request, res = response) => {
     try {
@@ -77,7 +77,7 @@ const updateProyecto = async (req = request, res = response) => {
     try {
         const { id } = req.params
         const etapas = await Etapa.findById(req.body.etapas)
-        const cliente  = await Cliente.findById(req.body.cliente)
+        const cliente = await Cliente.findById(req.body.cliente)
         const tipoProyecto = await TipoProyecto.findById(req.body.tipoProyecto)
         const universidad = await Universidad.findById(req.body.universidad)
 
@@ -99,7 +99,7 @@ const updateProyecto = async (req = request, res = response) => {
         const newProyecto = await Proyecto.findByIdAndUpdate
             (id, proyecto, { new: true })
         const proyectoUpdated = await Proyecto.findById(id)
-        
+
         res.status(201).json(proyectoUpdated)
     } catch (e) {
         res.status(500).json({

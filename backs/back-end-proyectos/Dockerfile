@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:18-alpine
 WORKDIR /app
 COPY package*.json /app
 RUN npm install -g npm@10.9.0 
